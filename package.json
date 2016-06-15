@@ -1,0 +1,20 @@
+{
+  "name": "typescript-mud",
+  "version": "0.0.1",
+  "description": "A mud written in TypeScript",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript",
+    "mud"
+  ],
+  "author": "Shaun Edwards",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^0.0.0",
+    "socket.io": "^1.4.6",
+    "ts-node": "^0.9.1"
+  }
+}
