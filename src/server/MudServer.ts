@@ -1,29 +1,29 @@
-var	http = require('http');
-var socketIO	= require('socket.io');
-var fs = require('fs');
+let	http = require("http");
+let socketIO	= require("socket.io");
+let fs = require("fs");
 
-export class MudServer {  
+export class MudServer {
 
   private handler (req, res) {
-    fs.readFile(__dirname + '/index.html', function (err, data) {
+    fs.readFile(__dirname + "/index.html", function (err, data) {
       if (err) {
         res.writeHead(500);
-        return res.end('Error loading index.html');
+        return res.end("Error loading index.html");
       }
-  
+
       res.writeHead(200);
       res.end(data);
     });
-  }    
-  
+  }
+
   public start() {
 
-    var serv = http.createServer(this.handler);  
+    let serv = http.createServer(this.handler);
 
     serv.listen(5000);
-    
-    var socketServer = socketIO(serv);
-    
+
+    let socketServer = socketIO(serv);
+
     // socketServer.on('connection', (socket: SocketIO.Socket) => {
     //         var sc = new socketConnection(socket);
     //         sc.authenticate().then((success) => {

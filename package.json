@@ -4,7 +4,8 @@
   "description": "A mud written in TypeScript",
   "main": "start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "typings install",
+    "start": "tsc -w & node start"
   },
   "keywords": [
     "typescript",
@@ -16,5 +17,9 @@
     "node": "^0.0.0",
     "socket.io": "^1.4.6",
     "ts-node": "^0.9.1"
+  },
+  "devDependencies": {
+    "tslint": "^3.11.0",
+    "typescript": "^1.8.10"
   }
 }
