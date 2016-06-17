@@ -6,6 +6,8 @@
   "scripts": {
     "postinstall": "typings install",
     "start": "tsc -w & node start"
+    "dev": "tsc -w & node start",
+    "run": "node start"
   },
   "keywords": [
     "typescript",
