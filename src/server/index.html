@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Console</title>
+    <style type="text/css">
+        html {
+            background-color: #000;
+        }
+        
+        body {
+            font-family: "Lucida Console";
+            font-size: 13px;
+            color: #fff;
+        }
+        
+        #in {
+            display: block;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 8px;
+            border-color: #fff;
+            border-width: 1px 0 0 0;
+            background-color: #000;
+            color: #0f0;
+        }
+        
+        #out {
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="out" style="font-family: monaco,Consolas,Lucida Console,monospace;"></div>
+    <input id="in" tabindex="0" />
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+<script type="text/javascript">
+        var commands = [];
+        var cmdCounter = 0;
+        var socket = new WebSocket('ws://localhost:5000');        
+        socket.onmessage = function (data) {
+          outputToConsole(data.data);
+        };
+        
+        socket.ondisconnect = function (data) {
+            outputToConsole("Disconnected from Server");
+        }
+
+        function processCommand() {
+            var inField = $("#in");
+            var input = inField.val();
+            socket.send(input);
+        }
+
+        function outputToConsole(text) {        
+            var outField = $("#out");
+            outField.append(document.createTextNode(text));            
+        }
+        
+        $( document ).ready(function() {
+            $("#in").keypress(function(e) {
+              if(e.which == 13) {
+                    processCommand();
+                    commands.push($("#in").val());
+                    $("#in").val('');
+                    cmdCounter = 0;
+              }
+            });
+        });
+        $(document).keydown(function(e) {
+            if (e.which == 38) {
+                if (commands.lengh > cmdCounter) {
+                    $("#in").val(commands[commands.lengh-cmdCounter++]);
+                }                
+            }
+        });
+    </script>
+
+<script>
+
+</script>
+
+</html>
